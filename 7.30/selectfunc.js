@@ -29,9 +29,11 @@ function sel(i, j){
 	var type2 = atoms [j][0];
 	if (i != j){
 	stringdiag = "Selected \"" + type1 + "\"" + " (ID \"" + i + "\"" + ")" + " at" + " (" + coor1 + ") <br>" + "Selected \"" + type2 + "\"" + " (ID \"" + j + "\"" + ")" + " at" + " (" + coor2 + ") <br>";
+	console.log("good", stringdiag, "|", br1, "|", br2);
 	}
 	else {
 	stringdiag = "Selected \"" + type1 + "\"" + " (ID \"" + i + "\"" + ")" + " at" + " (" + coor1 + ") "
+	console.log("bad", stringdiag, "|", br1, "|", br2);
 	}
 	document.getElementById('output').innerHTML=stringdiag;
 	return;

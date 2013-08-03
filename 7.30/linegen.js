@@ -19,10 +19,10 @@ function linegen(){
 	delarr[linarr.length] .position.x = newpos[0]*dial;
 	delarr[linarr.length] .position.y = newpos[1]*dial;
 	delarr[linarr.length] .position.z = newpos[2]*dial;
-	
-	delarr[linarr.length].rotation.z = findangle(br1,br2,"z");
+//	delarr[linarr.length].rotateonaxis("x", findangle(br1,br2,"x"));
 	delarr[linarr.length].rotation.x = findangle(br1,br2,"x");
 	delarr[linarr.length].rotation.y = findangle(br1,br2,"y");
+//	delarr[linarr.length].rotation.z = findangle(br1,br2,"z");
 	scene.add(delarr[linarr.length]);
 	console.log("Lingenfunction", coor1, " | ", coor2, "linarr", linarr.length);
 	render();
@@ -49,16 +49,16 @@ dz = b[2]-a[2];
 dy = b[1]-a[1];
 angle=Math.atan((dz/dy));
 console.log("Findanglefunc: X",angle);
-if (isNaN(dz/dy) == true){return 0;}
+if (isNaN(dz/dy) == true){return Math.PI/2;}
 return angle;
 }
 
 else if (c=="y"){
 dz = b[2]-a[2];
 dx = b[0]-a[0];
-angle=Math.atan((dx/dz));
+angle= Math.atan((dx/dz));
 console.log("Findanglefunc: Y",angle);
-if (isNaN(dx/dz) == true){return 0;}
+if (isNaN(dx/dz) == true){return Math.PI/2;}
 return angle;
 }
 
