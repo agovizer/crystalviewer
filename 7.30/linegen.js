@@ -65,7 +65,7 @@ return angle;
 else if (c=="z"){
 dx = b[0]-a[0];
 dy = b[1]-a[1];
-angle= (Math.PI*2)-Math.atan((dx/dy));
+angle= Math.atan((dx/dy));
 console.log("Findanglefunc: Z",angle);
 if (isNaN(dx/dy) == true){return 0;}
 return angle;
