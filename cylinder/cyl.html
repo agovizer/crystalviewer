@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="http://www.html5canvastutorials.com/libraries/three.min.js"></script>
+    <script src="rotate.js"></script>
+
+    <div id="container"></div>
+    <script defer="defer">
+      // revolutions per second
+      var angularSpeed = 0.2; 
+      var lastTime = 0;
+ 
+      // renderer
+      var renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+ 
+      // camera
+      var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+      camera.position.z = 700;
+ 
+      // scene
+      var scene = new THREE.Scene();
+                
+      // cylinder
+      // API: THREE.CylinderGeometry(bottomRadius, topRadius, height, segmentsRadius, segmentsHeight)
+      var cylinder = new THREE.Mesh(new THREE.CylinderGeometry(100, 100, 400, 50, 50, false), new THREE.MeshNormalMaterial());
+      cylinder.overdraw = true;
+      scene.add(cylinder);
+ 
+      var deg2rad = Math.PI/180;
+      var theta = 60*deg2rad, phi = 90*deg2rad;
+      var vx = new THREE.Vector3(1,0,0), vy = new THREE.Vector3(0,1,0);
+      rotateAroundWorldAxis(cylinder, vx, theta);
+      rotateAroundWorldAxis(cylinder, vy, phi);
+      renderer.render(scene, camera);
+    </script>
+  </body>
+</html>
