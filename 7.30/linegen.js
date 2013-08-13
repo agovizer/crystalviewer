@@ -1,12 +1,11 @@
 //mx
-var i;
-function linegen(){
+
+function linegen(a,b){
 	scene.remove(delarr[linarr.length-1]);
-	i = linarr[linarr.length-1];
-	j = linarr[linarr.length-2];
+	var i = a, j = b;
 	console.log(i,j,"far");
 	//return[i,j];
-	coor1 = atoms[i][1];
+	var coor1 = atoms[i][1];
 	var coor2 = atoms[j][1];
 	coor1 = coor1.toString();
 	coor2 = coor2.toString();
@@ -30,12 +29,13 @@ function linegen(){
     
 	var deg2rad = Math.PI/180;
     var theta = Math.atan(Math.sqrt(oriX*oriX+oriZ*oriZ)/oriY), phi = Math.atan(oriX/oriZ);
+	if (oriY == 0){theta = Math.PI/2;}
+	if (oriZ == 0 && oriX > 0){phi = Math.PI/2;}
+	if (oriZ == 0 && oriX < 0){phi = 3*Math.PI/2;}
 	if (theta < 0){
 		theta += Math.PI;
 	}
 	if (oriZ < 0) {phi  = Math.PI + phi;}
-	if (oriY == 0){theta = Math.PI/2;}
-	if (oriZ == 0){phi = Math.PI/2;}
     var vx = new THREE.Vector3(1,0,0), vy = new THREE.Vector3(0,1,0);
 	
     rotateAroundWorldAxis(delarr[linarr.length], vx, theta);
