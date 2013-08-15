@@ -1,0 +1,49 @@
+body {
+    color: #000;
+    font-family:Helvetica;
+    font-size:18px;
+    text-align:center;
+    font-weight: bold;
+    background-color: #000;
+    margin: 0px;
+    overflow: hidden;
+}
+
+#ban {
+    color:#fff;
+    position: absolute;
+    top: 0px; width: 100%;
+    padding: 5px;
+
+}
+#info {
+    color:#fff;
+    font-family:Helvetica;
+    position: absolute;
+    top: 0px; width: 100%;
+    font-size:11px;
+    text-align:right;
+    padding: 5px;
+
+}
+#outputheader{
+    color:#fff;
+    font-family:Helvetica;
+    position: absolute;
+    top: 25px; width: 100%;
+    font-size:11px;
+    text-align:left;
+    padding: 5px;
+
+}
+#output{
+    color:#808080;
+    font-family:Helvetica;
+    position: absolute;
+    top: 48px; width: 100%;
+    font-size:11px;
+    text-align:left;
+    padding: 5px;
+
+}
+
