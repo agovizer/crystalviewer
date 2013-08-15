@@ -1,172 +1,122 @@
 <!--Michael Xu 6-25-13-->
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Crystal Viewer</title>
-		<meta charset="utf-8">
-		<style>
-			body {
-				color: #000;
-				font-family:Helvetica;
-				font-size:18px;
-				text-align:center;
-				font-weight: bold;
-				background-color: #000;
-				margin: 0px;
-				overflow: hidden;
-			}
+<head>
+<title>Crystal Viewer</title>
+<meta charset="utf-8">
+<link href="default.css" media="all" rel="stylesheet" type="text/css" />
+</head>
+<div id="info">
+  <br><br>
+  Use mouse/arrow keys to pan around.<br>
+  Select two atoms using mouse.<br>
+  Press "H" for help<br>
+  Press "Enter" when done.<br>
+  Press "A" to toggle axes.
+</div>
+<div id = "outputheader">
+  Output (Press C to clear):
+</div>
+<div id = "output">
+  
+</div>
+<body>
+  <div id="container"></div>
+  <div id="ban">
+    Crystal Viewer Front End
+  </div>
+  //aux scripts
+  <script src="three.js"></script>
+  <script src="oc.js"></script>
+  <script src="build.js"></script>
+  <script src="input.js"></script>
+  <script src="cpk.js"></script>
+  <script src="getid.js"></script>
+  <script src="linegen.js"></script>
+  <script src="colgen.js"></script>
+  <script src="resize.js"></script>
+  <script src="select.js"></script>
+  <script src="keydown.js"></script>
+  <script src="axis.js"></script>
+  <script src="getoutput.js"></script>
+  <script src="help.js"></script>
+  <script src="selectfunc.js"></script>
+  <script src="rotate.js"></script>
+  <script>
+    console.log("MX");
+    var rez;
+    var done = 0;
+    var axisenabled = 0;
+    var container;
+    var renderer;
+    var dial=100; //global dialation factor
+    console.log("Dialation factor: ", dial);
+    var linarr = new Array(); //global array used by lingen.js and whose last 2 entries represented selected atom
+    var delarr = new Array(); // global(not nec) used to manage the deletion of prior lines
 
-			#ban {
-				color:#fff;
-				position: absolute;
-				top: 0px; width: 100%;
-				padding: 5px;
+    
+    //preconfigdata
+    renderer = new THREE.WebGLRenderer( { antialias: true } );
+    //renderer.setClearColor( scene.fog.color, 1 );
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    container = document.getElementById( 'container' );
+    container.appendChild( renderer.domElement );
+    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 ); 
+    camera.position.z = 250;
+    var controls = new THREE.OrbitControls( camera ); //see oc.js
+    controls.addEventListener( 'change', render ); //listens to any event
+    var scene = new THREE.Scene(); // inits scene
+    //scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
+    //mouse vector
+    var raycaster, projector;
+    var mouse = new THREE.Vector2(), INTERSECTED; 
+    projector = new THREE.Projector(); 
+    raycaster = new THREE.Raycaster(); 
+    build(); //calls scene builder from variety of sources
+    light();
+    animate();
+    function build(){
+    rez = 50 //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO prompt ("Enter sphere resolution"); //number of vertices being rendered, the less, the less (c/g)pu cycles used
+    var rad =5; //prompt ("Radius"); // radius of spheres
+    //prompt ("Dialation Factor"); //obsolete
+    crystalbuild(rez,rad);
+    if (typeof(bases) !== 'undefined') {
+    console.log("bases array exists");
+    basebuild();
+    }
+    else{
+    console.log("bases array does not exist");
+    }
+    //see input.js
 
-			}
-			#info {
-				color:#fff;
-				font-family:Helvetica;
-				position: absolute;
-				top: 0px; width: 100%;
-				font-size:11px;
-				text-align:right;
-				padding: 5px;
+    //below is a related to getcoor.js
 
-			}
-			#outputheader{
-				color:#fff;
-				font-family:Helvetica;
-				position: absolute;
-				top: 25px; width: 100%;
-				font-size:11px;
-				text-align:left;
-				padding: 5px;
-
-			}
-				#output{
-				color:#808080;
-				font-family:Helvetica;
-				position: absolute;
-				top: 48px; width: 100%;
-				font-size:11px;
-				text-align:left;
-				padding: 5px;
-
-			}
-
-		</style>
-	</head>
-	<div id="info">
-	<br><br>
-	Use mouse/arrow keys to pan around.<br>
-	Select two atoms using mouse.<br>
-	Press "H" for help<br>
-	Press "Enter" when done.<br>
-	Press "A" to toggle axes.
-	</div>
-	<div id = "outputheader">
-	Output (Press C to clear):
-	</div>
-	<div id = "output">
-	
-	</div>
-	<body>
-		<div id="container"></div>
-		<div id="ban">
-			Crystal Viewer Front End
-		</div>
-//aux scripts
-		<script src="three.js"></script>
-		<script src="oc.js"></script>
-		<script src="build.js"></script>
-		<script src="input.js"></script>
-		<script src="cpk.js"></script>
-		<script src="getid.js"></script>
-		<script src="linegen.js"></script>
-		<script src="colgen.js"></script>
-		<script src="resize.js"></script>
-		<script src="select.js"></script>
-		<script src="keydown.js"></script>
-		<script src="axis.js"></script>
-		<script src="getoutput.js"></script>
-		<script src="help.js"></script>
-		<script src="selectfunc.js"></script>
-		<script src="rotate.js"></script>
-		<script>
-		console.log("MX");
-		var rez;
-		var done = 0;
-		var axisenabled = 0;
-		var container;
-		var renderer;
-		var dial=100; //global dialation factor
-		console.log("Dialation factor: ", dial);
-		var linarr = new Array(); //global array used by lingen.js and whose last 2 entries represented selected atom
-		var delarr = new Array(); // global(not nec) used to manage the deletion of prior lines
-
-	
-		//preconfigdata
-		renderer = new THREE.WebGLRenderer( { antialias: true } );
-		//renderer.setClearColor( scene.fog.color, 1 );
-		renderer.setSize( window.innerWidth, window.innerHeight );
-		container = document.getElementById( 'container' );
-		container.appendChild( renderer.domElement );
-		var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 ); 
-		camera.position.z = 250;
-		var controls = new THREE.OrbitControls( camera ); //see oc.js
-		controls.addEventListener( 'change', render ); //listens to any event
-		var scene = new THREE.Scene(); // inits scene
-			//scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
-			//mouse vector
-		var raycaster, projector;
-		var mouse = new THREE.Vector2(), INTERSECTED; 
-		projector = new THREE.Projector(); 
-		raycaster = new THREE.Raycaster(); 
-		build(); //calls scene builder from variety of sources
-		light();
-		animate();
-function build(){
-	rez = 50 //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO prompt ("Enter sphere resolution"); //number of vertices being rendered, the less, the less (c/g)pu cycles used
-	var rad =5; //prompt ("Radius"); // radius of spheres
-	//prompt ("Dialation Factor"); //obsolete
-	crystalbuild(rez,rad);
-	if (typeof(bases) !== 'undefined') {
-	console.log("bases array exists");
-	basebuild();
-	}
-	else{
-	console.log("bases array does not exist");
-	}
-//see input.js
-
-//below is a related to getcoor.js
-
-	//end read from file
-//}
-/*else{
-	alert("No selection made");
-}*/
-}
-function light(){
-	amblight = new THREE.AmbientLight( 0x222222 );
-	scene.add( amblight );
-	dirlight = new THREE.DirectionalLight( 0xffffff );
-	dirlight.position.set( 1, 1, 1 );
-	scene.add( dirlight );
-	dirlight = new THREE.DirectionalLight( 0x002288 );
-	dirlight.position.set( -1, -1, -1 );
-	scene.add( dirlight );
-	}
+    //end read from file
+    //}
+    /*else{
+    alert("No selection made");
+    }*/
+    }
+    function light(){
+    amblight = new THREE.AmbientLight( 0x222222 );
+    scene.add( amblight );
+    dirlight = new THREE.DirectionalLight( 0xffffff );
+    dirlight.position.set( 1, 1, 1 );
+    scene.add( dirlight );
+    dirlight = new THREE.DirectionalLight( 0x002288 );
+    dirlight.position.set( -1, -1, -1 );
+    scene.add( dirlight );
+    }
 
 
-function animate() {
-	requestAnimationFrame( animate );
-	controls.update();
-	}
-function render() {
-	console.log("Renderfunction was called"); // disable to prevent consolespam
-	renderer.render( scene, camera );
-}
-</script>
+    function animate() {
+    requestAnimationFrame( animate );
+    controls.update();
+    }
+    function render() {
+    console.log("Renderfunction was called"); // disable to prevent consolespam
+    renderer.render( scene, camera );
+    }
+  </script>
 </body>
 </html>
