@@ -31,10 +31,15 @@ function select(x,y,z){
 		var id = getid(x,y,z);
 		insert = linarr.length;
 		linarr[insert] = id;
-		var both=linegen();
+		var lasttwo= getlinarr();
+		var both=linegen(lasttwo[0],lasttwo[1]);
 		b1=both[0];
 		b2=both[1];
 		sel(b1,b2);
 		}
 }
-
+function getlinarr(){
+var i = linarr[linarr.length-1];
+var j = linarr[linarr.length-2];
+return [i,j];
+}

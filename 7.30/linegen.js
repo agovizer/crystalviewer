@@ -1,10 +1,11 @@
 //mx
-var i;
-function linegen(){
+
+function linegen(a,b){
 	scene.remove(delarr[linarr.length-1]);
-	i = linarr[linarr.length-1];
-	j = linarr[linarr.length-2];
-	coor1 = atoms[i][1];
+	var i = a, j = b;
+	console.log(i,j,"far");
+	//return[i,j];
+	var coor1 = atoms[i][1];
 	var coor2 = atoms[j][1];
 	coor1 = coor1.toString();
 	coor2 = coor2.toString();
@@ -20,12 +21,30 @@ function linegen(){
 	delarr[linarr.length] .position.y = newpos[1]*dial;
 	delarr[linarr.length] .position.z = newpos[2]*dial;
 //	delarr[linarr.length].rotateonaxis("x", findangle(br1,br2,"x"));
-	delarr[linarr.length].rotation.x = findangle(br1,br2,"x");
-	delarr[linarr.length].rotation.y = findangle(br1,br2,"y");
-//	delarr[linarr.length].rotation.z = findangle(br1,br2,"z");
+//	delarr[linarr.length].rotation.x = findangle(br1,br2,"x");
+//	delarr[linarr.length].rotation.y = findangle(br1,br2,"y");
+//	delarr[linarr.length].rotation.z = findangle(br1,br2,"z"); */
+//delarr[linarr.length].overdraw = true;
+	var oriX = br2[0]-br1[0], oriY = br2[1]-br1[1], oriZ = br2[2] - br1[2];
+    
+	var deg2rad = Math.PI/180;
+    var theta = Math.atan(Math.sqrt(oriX*oriX+oriZ*oriZ)/oriY), phi = Math.atan(oriX/oriZ);
+	if (oriY == 0){theta = Math.PI/2;}
+	if (oriZ == 0 && oriX > 0){phi = Math.PI/2;}
+	if (oriZ == 0 && oriX < 0){phi = 3*Math.PI/2;}
+	if (theta < 0){
+		theta += Math.PI;
+	}
+	if (oriZ < 0) {phi  = Math.PI + phi;}
+    var vx = new THREE.Vector3(1,0,0), vy = new THREE.Vector3(0,1,0);
+	
+    rotateAroundWorldAxis(delarr[linarr.length], vx, theta);
+	rotateAroundWorldAxis(delarr[linarr.length], vy, phi);
+    renderer.render(scene, camera);
 	scene.add(delarr[linarr.length]);
 	console.log("Lingenfunction", coor1, " | ", coor2, "linarr", linarr.length);
 	render();
+	console.log(i,j,"close");
 	return [i,j];
 }
 function findcoor(a,b){
@@ -65,7 +84,7 @@ return angle;
 else if (c=="z"){
 dx = b[0]-a[0];
 dy = b[1]-a[1];
-angle= (Math.PI*2)-Math.atan((dx/dy));
+angle= Math.atan((dx/dy));
 console.log("Findanglefunc: Z",angle);
 if (isNaN(dx/dy) == true){return 0;}
 return angle;
