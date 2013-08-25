@@ -5,6 +5,25 @@
 <title>Crystal Viewer</title>
 <meta charset="utf-8">
 <link href="default.css" media="all" rel="stylesheet" type="text/css" />
+
+<script src="three.js"></script>
+<script src="oc.js"></script>
+
+<script src="build.js"></script>
+<script src="input.js"></script>
+<script src="cpk.js"></script>
+<script src="getid.js"></script>
+<script src="linegen.js"></script>
+<script src="colgen.js"></script>
+<script src="resize.js"></script>
+<script src="select.js"></script>
+<script src="keydown.js"></script>
+<script src="axis.js"></script>
+<script src="getoutput.js"></script>
+<script src="help.js"></script>
+<script src="selectfunc.js"></script>
+<script src="rotate.js"></script>
+<script src="main.js"></script>
 </head>
 <div id="info">
   <br><br>
@@ -25,23 +44,6 @@
   <div id="ban">
     Crystal Viewer Front End
   </div>
-  //aux scripts
-  <script src="three.js"></script>
-  <script src="oc.js"></script>
-  <script src="build.js"></script>
-  <script src="input.js"></script>
-  <script src="cpk.js"></script>
-  <script src="getid.js"></script>
-  <script src="linegen.js"></script>
-  <script src="colgen.js"></script>
-  <script src="resize.js"></script>
-  <script src="select.js"></script>
-  <script src="keydown.js"></script>
-  <script src="axis.js"></script>
-  <script src="getoutput.js"></script>
-  <script src="help.js"></script>
-  <script src="selectfunc.js"></script>
-  <script src="rotate.js"></script>
   <script>
     console.log("MX");
     var rez;
@@ -53,7 +55,6 @@
     console.log("Dialation factor: ", dial);
     var linarr = new Array(); //global array used by lingen.js and whose last 2 entries represented selected atom
     var delarr = new Array(); // global(not nec) used to manage the deletion of prior lines
-
     
     //preconfigdata
     renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -75,48 +76,6 @@
     build(); //calls scene builder from variety of sources
     light();
     animate();
-    function build(){
-    rez = 50 //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO prompt ("Enter sphere resolution"); //number of vertices being rendered, the less, the less (c/g)pu cycles used
-    var rad =5; //prompt ("Radius"); // radius of spheres
-    //prompt ("Dialation Factor"); //obsolete
-    crystalbuild(rez,rad);
-    if (typeof(bases) !== 'undefined') {
-    console.log("bases array exists");
-    basebuild();
-    }
-    else{
-    console.log("bases array does not exist");
-    }
-    //see input.js
-
-    //below is a related to getcoor.js
-
-    //end read from file
-    //}
-    /*else{
-    alert("No selection made");
-    }*/
-    }
-    function light(){
-    amblight = new THREE.AmbientLight( 0x222222 );
-    scene.add( amblight );
-    dirlight = new THREE.DirectionalLight( 0xffffff );
-    dirlight.position.set( 1, 1, 1 );
-    scene.add( dirlight );
-    dirlight = new THREE.DirectionalLight( 0x002288 );
-    dirlight.position.set( -1, -1, -1 );
-    scene.add( dirlight );
-    }
-
-
-    function animate() {
-    requestAnimationFrame( animate );
-    controls.update();
-    }
-    function render() {
-    console.log("Renderfunction was called"); // disable to prevent consolespam
-    renderer.render( scene, camera );
-    }
   </script>
 </body>
 </html>
