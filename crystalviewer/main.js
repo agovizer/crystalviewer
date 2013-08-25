@@ -1,11 +1,11 @@
-function build(){
+function build(bases, atoms){
     rez = 50 //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO prompt ("Enter sphere resolution"); //number of vertices being rendered, the less, the less (c/g)pu cycles used
     var rad =5; //prompt ("Radius"); // radius of spheres
     //prompt ("Dialation Factor"); //obsolete
-    crystalbuild(rez,rad);
+    crystalbuild(rez,rad, atoms);
     if (typeof(bases) !== 'undefined') {
 	console.log("bases array exists");
-	basebuild();
+	basebuild(bases);
     }
     else{
 	console.log("bases array does not exist");

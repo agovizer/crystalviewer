@@ -10,7 +10,6 @@
 <script src="oc.js"></script>
 
 <script src="build.js"></script>
-<script src="input.js"></script>
 <script src="cpk.js"></script>
 <script src="getid.js"></script>
 <script src="linegen.js"></script>
@@ -45,6 +44,24 @@
     Crystal Viewer Front End
   </div>
   <script>
+
+    var bases = {a: [1,0,0], b:[0,1,0], c:[0,0,1]};
+
+    var atoms = [
+    ['Na', [0, 0, 0]],
+    //
+    ['Na', [-.5, -.5, 0]],
+    ['Na', [-.5, 0, 0]],
+    //
+    ['Na', [0.5, 0.5, 0]],
+    ['Na', [0.5, 0, 0.5]],
+    ['Na', [0, 0.5, 0.5]],
+    ['Cl', [0.5, 0, 0]],
+    ['Cl', [0, 0.5, 0]],
+    ['Cl', [0, 0, 0.5]],
+    ['Cl', [0.5, 0.5, 0.5]],
+    ];
+
     console.log("MX");
     var rez;
     var done = 0;
@@ -73,7 +90,7 @@
     var mouse = new THREE.Vector2(), INTERSECTED; 
     projector = new THREE.Projector(); 
     raycaster = new THREE.Raycaster(); 
-    build(); //calls scene builder from variety of sources
+    build(bases, atoms); //calls scene builder from variety of sources
     light();
     animate();
   </script>

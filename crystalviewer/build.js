@@ -1,6 +1,6 @@
 //mx
 
-function crystalbuild(rez,rad){
+function crystalbuild(rez,rad, atoms){
     var geometry = new THREE.SphereGeometry(rad,rez,rez,0,Math.PI * 2,0, Math.PI); //creates the basic sphere geo
     console.log("Buildfunc4: rez,rad", rez, rad);
     for ( var i = 0; i < atoms.length; i++ ) {
@@ -20,7 +20,7 @@ function crystalbuild(rez,rad){
     }
 }
 
-function basebuild(){
+function basebuild(bases){
     bases.a = bases.a.map(function(x) { return x * 100; });
     bases.b = bases.b.map(function(x) { return x * 100; });
     bases.c = bases.c.map(function(x) { return x * 100; });
