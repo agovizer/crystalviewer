@@ -1,6 +1,10 @@
 //mx
 
-function crystalbuild(rez,rad, atoms){
+CrystalViewer.prototype.addatoms = function(rez,rad){
+    var atoms = this.atoms;
+    var scene = this.scene;
+    var dial = this.dial;
+    
     var geometry = new THREE.SphereGeometry(rad,rez,rez,0,Math.PI * 2,0, Math.PI); //creates the basic sphere geo
     console.log("Buildfunc4: rez,rad", rez, rad);
     for ( var i = 0; i < atoms.length; i++ ) {
@@ -18,26 +22,28 @@ function crystalbuild(rez,rad, atoms){
 	item.matrixAutoUpdate = false;
 	scene.add(item);
     }
-}
+};
 
-function basebuild(bases){
+CrystalViewer.prototype.buildframe = function(){
+    var scene = this.scene;
+    var bases = this.bases;
     bases.a = bases.a.map(function(x) { return x * 100; });
     bases.b = bases.b.map(function(x) { return x * 100; });
     bases.c = bases.c.map(function(x) { return x * 100; });
-    one = [0,0,0];
-    two = bases.a;
-    three = comb(bases.a,bases.b);
-    four = bases.b;
-    five = comb(one, bases.c);
-    six = comb(two, bases.c);
-    seven = comb(three, bases.c);
-    eight = comb(four, bases.c);
+    var one = [0,0,0];
+    var two = bases.a;
+    var three = comb(bases.a,bases.b);
+    var four = bases.b;
+    var five = comb(one, bases.c);
+    var six = comb(two, bases.c);
+    var seven = comb(three, bases.c);
+    var eight = comb(four, bases.c);
     var material5 = new THREE.LineBasicMaterial({color: 0x808080});
     var geometry5 = new THREE.Geometry();
     for (var i=1; i<5; i++){
 	var cor=eval(basenum[i]);
 	geometry5.vertices.push(new THREE.Vector3(cor[0],cor[1],cor[2]));
-	base = new THREE.Line(geometry5, material5); 
+	var base = new THREE.Line(geometry5, material5); 
 	scene.add(base);
 	if (i==4){
 	    var cor=eval(basenum[1]);
@@ -83,7 +89,7 @@ function basebuild(bases){
     }
     
     console.log("basebuildfunc: ",one, two, three, four, five, six, seven, eight);
-}
+};
 
 function comb(x,y){
     var out = new Array();
