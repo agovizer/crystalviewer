@@ -45,7 +45,6 @@
     Crystal Viewer Front End
   </div>
   <script>
-
     var bases = {a: [1,0,0], b:[0,1,0], c:[0,0,1]};
 
     var atoms = [
@@ -63,36 +62,13 @@
     ['Cl', [0.5, 0.5, 0.5]],
     ];
 
-    console.log("MX");
-    var rez;
-    var container;
-    var renderer;
-    
-    //preconfigdata
-    renderer = new THREE.WebGLRenderer( { antialias: true } );
-    //renderer.setClearColor( scene.fog.color, 1 );
-    renderer.setSize( window.innerWidth, window.innerHeight );
-    container = document.getElementById( 'container' );
-    container.appendChild( renderer.domElement );
-    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 ); 
-    camera.position.z = 250;
-    var controls = new THREE.OrbitControls( camera ); //see oc.js
-    
-    var scene = new THREE.Scene(); // inits scene
-    //scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
-
-/*    
-    controls.addEventListener( 'change', function () {
-      console.log("Renderfunction was called"); // disable to prevent consolespam
-      renderer.render( scene, camera );
-    }); //listens to any event
-*/  
-
     //
-    var cv = new CrystalViewer(bases, atoms, scene, camera, controls, renderer);
+    var cv = new CrystalViewer(bases, atoms, "container");
     
     //
-    cv.build(); //calls scene builder from variety of sources
+    var rez = 50 //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO prompt ("Enter sphere resolution"); //number of vertices being rendered, the less, the less (c/g)pu cycles used
+    var rad = 5; //prompt ("Radius"); // radius of spheres
+    cv.build(rez, rad); //calls scene builder from variety of sources
     cv.light();
     cv.animate();
   </script>

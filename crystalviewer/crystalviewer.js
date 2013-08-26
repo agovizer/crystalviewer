@@ -1,5 +1,25 @@
-function CrystalViewer(bases, atoms, scene, camera, controls, renderer)
+function CrystalViewer(bases, atoms, containerID)
 {
+    //preconfigdata
+    // renderer
+    var renderer = new THREE.WebGLRenderer( { antialias: true } );
+    //renderer.setClearColor( scene.fog.color, 1 );
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    
+    // add to container div
+    var container = document.getElementById( containerID );
+    container.appendChild( renderer.domElement );
+    
+    // camera
+    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 ); 
+    camera.position.z = 250;
+    // controls
+    var controls = new THREE.OrbitControls( camera ); //see oc.js
+    
+    // scene
+    var scene = new THREE.Scene(); // inits scene
+    //scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
+
     var self = this;
     this.bases = bases; this.atoms = atoms;
     // from index.html
@@ -12,6 +32,7 @@ function CrystalViewer(bases, atoms, scene, camera, controls, renderer)
     this.delarr = new Array(); // global(not nec) used to manage the deletion of prior lines
     this.linarr = new Array(); //global array used by lingen.js and whose last 2 entries represented selected atom
     this.dial=100; //global dialation factor
+    this.rez = null;
     console.log("Dialation factor: ", this.dial);
     this.done = 0;
 

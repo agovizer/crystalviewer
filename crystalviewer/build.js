@@ -4,6 +4,8 @@ CrystalViewer.prototype.addatoms = function(rez,rad){
     var atoms = this.atoms;
     var scene = this.scene;
     var dial = this.dial;
+    this.rez = rez;
+    this.rad = rad;
     
     var geometry = new THREE.SphereGeometry(rad,rez,rez,0,Math.PI * 2,0, Math.PI); //creates the basic sphere geo
     console.log("Buildfunc4: rez,rad", rez, rad);

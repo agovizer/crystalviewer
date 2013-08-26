@@ -1,6 +1,4 @@
-CrystalViewer.prototype.build = function(){
-    var rez = 50 //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO prompt ("Enter sphere resolution"); //number of vertices being rendered, the less, the less (c/g)pu cycles used
-    var rad =5; //prompt ("Radius"); // radius of spheres
+CrystalViewer.prototype.build = function(rez, rad){
     //prompt ("Dialation Factor"); //obsolete
     this.addatoms(rez,rad);
     if (typeof(bases) !== 'undefined') {

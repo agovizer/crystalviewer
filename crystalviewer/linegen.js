@@ -18,7 +18,7 @@ CrystalViewer.prototype.linegen = function(a,b){
     var br2=coor2.split(",");
     var material =  new THREE.MeshPhongMaterial( { color:0xffffff, shading: THREE.SmoothShading } ); 
     tall = findlength(br1,br2) * this.dial;
-    var geometry = new THREE.CylinderGeometry(0.5,0.5,tall,rez,rez,false);
+    var geometry = new THREE.CylinderGeometry(0.5,0.5,tall,this.rez,this.rez,false);
     delarr[linarr.length] = new THREE.Mesh(geometry, material);
     newpos = findcoor(br1,br2);
     console.log("aefae",newpos);
@@ -46,7 +46,7 @@ CrystalViewer.prototype.linegen = function(a,b){
     
     rotateAroundWorldAxis(delarr[linarr.length], vx, theta);
     rotateAroundWorldAxis(delarr[linarr.length], vy, phi);
-    renderer.render(scene, camera);
+    renderer.render(this.scene, this.camera);
     scene.add(delarr[linarr.length]);
     console.log("Lingenfunction", coor1, " | ", coor2, "linarr", linarr.length);
     this.render();
