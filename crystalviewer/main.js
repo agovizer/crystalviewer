@@ -1,32 +1,32 @@
-CrystalViewer.prototype.build = function(rez, rad){
-    //prompt ("Dialation Factor"); //obsolete
-    this.addatoms(rez,rad);
-    if (typeof(bases) !== 'undefined') {
-	console.log("bases array exists");
-	this.buildframe();
-    }
-    else{
-	console.log("bases array does not exist");
-    }
-    //see input.js
+function main(contaierID) {
+    
+    var bases = {a: [1,0,0], b:[0,1,0], c:[0,0,1]};
 
-    //below is a related to getcoor.js
+    var atoms = [
+	['Na', [0, 0, 0]],
+	//
+	['Na', [-.5, -.5, 0]],
+	['Na', [-.5, 0, 0]],
+	//
+	['Na', [0.5, 0.5, 0]],
+	['Na', [0.5, 0, 0.5]],
+	['Na', [0, 0.5, 0.5]],
+	['Cl', [0.5, 0, 0]],
+	['Cl', [0, 0.5, 0]],
+	['Cl', [0, 0, 0.5]],
+	['Cl', [0.5, 0.5, 0.5]],
+    ];
 
-    //end read from file
-    //}
-    /*else{
-      alert("No selection made");
-      }*/
-};
+    // crystal viewer
+    var cv = new CrystalViewer(bases, atoms, contaierID);
 
-CrystalViewer.prototype.light = function(){
-    var scene = this.scene;
-    var amblight = new THREE.AmbientLight( 0x222222 );
-    scene.add( amblight );
-    var dirlight = new THREE.DirectionalLight( 0xffffff );
-    dirlight.position.set( 1, 1, 1 );
-    scene.add( dirlight );
-    dirlight = new THREE.DirectionalLight( 0x002288 );
-    dirlight.position.set( -1, -1, -1 );
-    scene.add( dirlight );
-};
+    //
+    var rez = 50 //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO prompt ("Enter sphere resolution"); //number of vertices being rendered, the less, the less (c/g)pu cycles used
+    var rad = 5; //prompt ("Radius"); // radius of spheres
+
+    //
+    cv.build(rez, rad); //calls scene builder from variety of sources
+    cv.light();
+    cv.animate();
+    
+}

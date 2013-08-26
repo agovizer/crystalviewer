@@ -5,6 +5,7 @@ CrystalViewer.prototype.linegen = function(a,b){
     var renderer = this.renderer;
     var linarr = this.linarr, delarr = this.delarr;
     var dial = this.dial;
+    var atoms = this.atoms;
     
     scene.remove(delarr[linarr.length-1]);
     var i = a, j = b;
