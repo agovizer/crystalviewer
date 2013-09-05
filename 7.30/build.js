@@ -1,5 +1,5 @@
 //mx
-
+// this module takes the input from input.js and draws the spheres with the correct coordinates. Function basebuild builds the basis vectors.
 function crystalbuild(rez,rad){
 	var geometry = new THREE.SphereGeometry(rad,rez,rez,0,Math.PI * 2,0, Math.PI); //creates the basic sphere geo
 	console.log("Buildfunc4: rez,rad", rez, rad);

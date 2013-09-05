@@ -1,4 +1,5 @@
 //mx
+//this module: Listens to any change in windows size and renders the scene appropriately  with the correct width, height and aspect ratio.
 window.addEventListener( 'resize', re, false );
 function re() {
 	camera.aspect = window.innerWidth / window.innerHeight;

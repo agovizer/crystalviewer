@@ -1,4 +1,5 @@
 //mx
+// gets data pertaining to the selected functions and displays info to the console
 function selshift(x,y,z){
 		shift = 0;
 		var id = getid(x,y,z);

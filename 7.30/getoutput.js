@@ -1,4 +1,5 @@
 //mx
+//displays selected atoms on the console
 function getoutput(){
 	i = linarr[linarr.length-1];
 	j = linarr[linarr.length-2];

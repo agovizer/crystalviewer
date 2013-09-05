@@ -1,4 +1,5 @@
 //mx
+//this module draws the axis of the coordinate grid
 var xaxis;
 var yaxis;
 var zaxis;

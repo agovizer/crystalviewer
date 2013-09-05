@@ -1,3 +1,4 @@
+//this is the input.js, it takes bases = {x: [#,#,#], ...} and atoms = ['AA', [#,#,#}]...]
 bases = {a: [1,0,0], b:[0,1,0], c:[0,0,1]};  
 
 atoms = [

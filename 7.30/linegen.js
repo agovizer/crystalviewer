@@ -1,5 +1,5 @@
 //mx
-
+//generates the cylinder based on the points selected
 function linegen(a,b){
 	scene.remove(delarr[linarr.length-1]);
 	var i = a, j = b;

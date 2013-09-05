@@ -1,4 +1,5 @@
 //mx
+//this module contains the querying function for the cpk coloring and its dictionary
 function cpkquery(x){
 	console.log("cpqueryfunctionorig: ", x);
 	var y = "0x" + cpkhtml[x];

@@ -1,4 +1,5 @@
 //mx
+//listens to the keypresses and calls the appropriate functions
 document.addEventListener('keydown', kdwn, false);
 var shift = 0;
 function kdwn( kd ){

@@ -1,4 +1,5 @@
 //mx			
+//gets mouse events and calls appropriate functions for selection of elements.
 document.addEventListener( 'mousedown', msedwn, false );
 function msedwn( msd ) {
 	if (done == 1){

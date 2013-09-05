@@ -2,7 +2,7 @@
  * @author mrdoob / http://mrdoob.com/
  * @author Larry Battle / http://bateru.com/news
  */
-
+//standard threejs dev lib
 var THREE = THREE || { REVISION: '58' };
 
 self.console = self.console || {

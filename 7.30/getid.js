@@ -1,4 +1,5 @@
 //mx
+//this function gets the id based on the selected functions based on which was selected. It queries input.js
 var errororig = new Array();
 function getid(x, y, z){
 				var error = new Array();

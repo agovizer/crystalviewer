@@ -1,4 +1,4 @@
-// Rotate an object around an arbitrary axis in world space       
+// Rotate an object around an arbitrary axis in world space. Used for cylinder generation	   
 function rotateAroundWorldAxis(object, axis, radians) {
     var rotWorldMatrix = new THREE.Matrix4();
     rotWorldMatrix.makeRotationAxis(axis.normalize(), radians);
