@@ -2,7 +2,7 @@
  * @author mrdoob / http://mrdoob.com/
  * @author Larry Battle / http://bateru.com/news
  */
-
+//this is the main library that provides abstraction to native webgl
 var THREE = THREE || { REVISION: '58' };
 
 self.console = self.console || {

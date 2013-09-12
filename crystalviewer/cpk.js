@@ -1,10 +1,14 @@
 //mx
+//this file gets the cpk colors from input
+
+//queries cpkdictionary and returns result
 function cpkquery(x){
 	console.log("cpqueryfunctionorig: ", x);
 	var y = "0x" + cpkhtml[x];
 	console.log("cpqueryfunctionnew: ", y);
 	return(y);
 }
+//cpk dictionary
 var cpkhtml = {
 "H":"FFFFFF",
 "He":"FF1493",

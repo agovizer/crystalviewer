@@ -1,3 +1,5 @@
+//mx
+//main generation of the scene (setting)
 function CrystalViewer(bases, atoms, containerID)
 {
     //preconfigdata
@@ -91,6 +93,7 @@ CrystalViewer.prototype = {
 	requestAnimationFrame(function() {self.animate();});
 	this.controls.update();
     }
+	//lighting for the scene
     , 'light': function(){
 	var scene = this.scene;
 	var amblight = new THREE.AmbientLight( 0x222222 );

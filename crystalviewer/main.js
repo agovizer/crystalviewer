@@ -1,3 +1,4 @@
+//main container that contains the input bases and atoms.
 function main(contaierID) {
     
     var bases = {a: [1,0,0], b:[0,1,0], c:[0,0,1]};
@@ -18,7 +19,8 @@ function main(contaierID) {
     ];
 
     // crystal viewer
-    var cv = new CrystalViewer(bases, atoms, contaierID);
+    var cv = new CrystalViewer(bases, atoms, contaierID);	//initializes object crystal viewer
+
 
     //
     var rez = 50 //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO prompt ("Enter sphere resolution"); //number of vertices being rendered, the less, the less (c/g)pu cycles used

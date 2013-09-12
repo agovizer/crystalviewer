@@ -1,4 +1,5 @@
 //mx
+//draws axis on scene
 
 CrystalViewer.prototype.axistog = function(){
     var axisenabled = this.axisenabled;
@@ -32,6 +33,7 @@ CrystalViewer.prototype.axistog = function(){
 	axisenabled = 1;
 	return;
     }
+	//removes axis
     else {
 	scene.remove(this.xaxis);scene.remove(this.yaxis);scene.remove(this.zaxis);
 	console.log("togaxisfunction: all axis deleted");

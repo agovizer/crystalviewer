@@ -1,4 +1,6 @@
 //mx
+//modified version of orbitcontrols library that allows user interaction.
+//original authors:  qiao / https://github.com/qiao mrdoob / http://mrdoob.com alteredq / http://alteredqualia.com/ WestLangley / http://github.com/WestLangley erich666 / http://erichaines.com
 
 THREE.OrbitControls = function ( object, domElement ) {
 

@@ -1,5 +1,7 @@
 //mx
+//builds scene
 
+//handles atom drawing
 CrystalViewer.prototype.addatoms = function(rez,rad){
     var atoms = this.atoms;
     var scene = this.scene;
@@ -7,29 +9,30 @@ CrystalViewer.prototype.addatoms = function(rez,rad){
     this.rez = rez;
     this.rad = rad;
     
-    var geometry = new THREE.SphereGeometry(rad,rez,rez,0,Math.PI * 2,0, Math.PI); //creates the basic sphere geo
-    console.log("Buildfunc4: rez,rad", rez, rad);
-    for ( var i = 0; i < atoms.length; i++ ) {
+    var geometry = new THREE.SphereGeometry(rad,rez,rez,0,Math.PI * 2,0, Math.PI); //creates the basic sphere geometry
+    console.log("Buildfunc4: rez,rad", rez, rad);//debug info
+    for ( var i = 0; i < atoms.length; i++ ) {//creates for every atom
 	var cpk = cpkquery(atoms[i][0]); //calls cpk to get atomic num
 	var material =  new THREE.MeshPhongMaterial( { color:eval(cpk), shading: THREE.SmoothShading } ); //sets the material using cpk color
-	var coor = atoms[i][1]; 
-	coors=coor.toString();
+	var coor = atoms[i][1]; //get coordinate
+	coors=coor.toString();//parse coordinate
 	console.log("Buildfunc4:", coors);
 	var br=coors.split(",");
 	var item = new THREE.Mesh( geometry, material );
-	item.position.x = br[0]*dial;
+	item.position.x = br[0]*dial;//sets position
 	item.position.y = br[1]*dial;
 	item.position.z = br[2]*dial;
 	item.updateMatrix();
 	item.matrixAutoUpdate = false;
-	scene.add(item);
+	scene.add(item);//adds to scene
     }
 };
 
+//handles basis vector drawing
 CrystalViewer.prototype.buildframe = function(){
     var scene = this.scene;
     var bases = this.bases;
-    bases.a = bases.a.map(function(x) { return x * 100; });
+    bases.a = bases.a.map(function(x) { return x * 100; });//scalar multiplication
     bases.b = bases.b.map(function(x) { return x * 100; });
     bases.c = bases.c.map(function(x) { return x * 100; });
     var one = [0,0,0];
@@ -47,6 +50,7 @@ CrystalViewer.prototype.buildframe = function(){
 	geometry5.vertices.push(new THREE.Vector3(cor[0],cor[1],cor[2]));
 	var base = new THREE.Line(geometry5, material5); 
 	scene.add(base);
+	//if statements needed to combine all the vertices with appropiate lines
 	if (i==4){
 	    var cor=eval(basenum[1]);
 	    geometry5.vertices.push(new THREE.Vector3(cor[0],cor[1],cor[2]));
@@ -93,6 +97,7 @@ CrystalViewer.prototype.buildframe = function(){
     console.log("basebuildfunc: ",one, two, three, four, five, six, seven, eight);
 };
 
+//combines arrays
 function comb(x,y){
     var out = new Array();
     for ( var k=0; k<bases.a.length; k++){
@@ -101,6 +106,7 @@ function comb(x,y){
     return out;
 }
 
+//dictionary for basenum
 var basenum = {
     "1":"one",
     "2":"two",

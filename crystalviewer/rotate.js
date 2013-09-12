@@ -1,4 +1,6 @@
 // Rotate an object around an arbitrary axis in world space       
+
+//used by linegen.js to rotate around world axis
 function rotateAroundWorldAxis(object, axis, radians) {
     var rotWorldMatrix = new THREE.Matrix4();
     rotWorldMatrix.makeRotationAxis(axis.normalize(), radians);

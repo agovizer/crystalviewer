@@ -1,4 +1,6 @@
 //mx
+
+//queries the input array and returns the id of the selected atom (select.js returns approx location)
 CrystalViewer.prototype.getid = function(x, y, z){
     var atoms = this.atoms;
     var errororig = new Array();
@@ -17,15 +19,19 @@ CrystalViewer.prototype.getid = function(x, y, z){
     errororig = error.slice(0);
     error.sort(numasc);
     var goal=error[0];
-    var index=look(goal, errororig);
+    var index=look(goal, errororig); //gets index based on lowest error
     console.log("getidfunction: coors, index ", coors, index);
     return index;
 };
 
-//aux functions			
+//aux functions		
+
+//sorts array	
 function numasc(a,b){
     return (a - b);
 }
+
+//gets index 
 function look(g, errororig){
     // doesnt work: var num = errororig.indexOf(g);
     for(var ii=0; ii<errororig.length; ii++){

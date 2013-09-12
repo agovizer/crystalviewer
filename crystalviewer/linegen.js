@@ -1,29 +1,30 @@
 //mx
+//this file generates cylinders connecting the two atoms based on the selected points
 CrystalViewer.prototype.linegen = function(a,b){
-    if (a==undefined || b==undefined) return;
+    if (a==undefined || b==undefined) return;//cleanses input
     var scene = this.scene;
     var renderer = this.renderer;
     var linarr = this.linarr, delarr = this.delarr;
     var dial = this.dial;
     var atoms = this.atoms;
     
-    scene.remove(delarr[linarr.length-1]);
+    scene.remove(delarr[linarr.length-1]); //removes previous cylinder object
     var i = a, j = b;
     console.log(i,j,"far");
     //return[i,j];
-    var coor1 = atoms[i][1];
+    var coor1 = atoms[i][1]; //get coordinates
     var coor2 = atoms[j][1];
-    coor1 = coor1.toString();
+    coor1 = coor1.toString();//parses coordinates
     coor2 = coor2.toString();
     var br1=coor1.split(",");
     var br2=coor2.split(",");
-    var material =  new THREE.MeshPhongMaterial( { color:0xffffff, shading: THREE.SmoothShading } ); 
+    var material =  new THREE.MeshPhongMaterial( { color:0xffffff, shading: THREE.SmoothShading } ); //sets type of material
     tall = findlength(br1,br2) * this.dial;
     var geometry = new THREE.CylinderGeometry(0.5,0.5,tall,this.rez,this.rez,false);
-    delarr[linarr.length] = new THREE.Mesh(geometry, material);
+    delarr[linarr.length] = new THREE.Mesh(geometry, material); //creates new variable and points it to new object
     newpos = findcoor(br1,br2);
     console.log("aefae",newpos);
-    delarr[linarr.length] .position.x = newpos[0]*dial;
+    delarr[linarr.length] .position.x = newpos[0]*dial; //sets attributes
     delarr[linarr.length] .position.y = newpos[1]*dial;
     delarr[linarr.length] .position.z = newpos[2]*dial;
     //	delarr[linarr.length].rotateonaxis("x", findangle(br1,br2,"x"));
@@ -31,6 +32,8 @@ CrystalViewer.prototype.linegen = function(a,b){
     //	delarr[linarr.length].rotation.y = findangle(br1,br2,"y");
     //	delarr[linarr.length].rotation.z = findangle(br1,br2,"z"); */
     //delarr[linarr.length].overdraw = true;
+	
+	//gets orientation of cylinder
     var oriX = br2[0]-br1[0], oriY = br2[1]-br1[1], oriZ = br2[2] - br1[2];
     
     var deg2rad = Math.PI/180;
@@ -52,9 +55,10 @@ CrystalViewer.prototype.linegen = function(a,b){
     console.log("Lingenfunction", coor1, " | ", coor2, "linarr", linarr.length);
     this.render();
     console.log(i,j,"close");
-    return [i,j];
+    return [i,j]; //returns last two values
 };
 
+//gets cordinates from ids given
 function findcoor(a,b){
     var newpos = new Array();
     for (i=0; i<3; i++){
@@ -63,12 +67,16 @@ function findcoor(a,b){
     }
     return newpos;
 }
+
+//calculates length of cylinder
 function findlength(a,b){
     var distance;
     distance = Math.sqrt(Math.pow((a[0]-b[0]),2) + Math.pow((a[1]-b[1]),2) + Math.pow((a[2]-b[2]),2));
     console.log("findlengthfunc", distance);
     return distance;
 }
+
+//obsolete: for line generation based on line. Uncalled function. Obsoleted because of ANGLE problem.
 function findangle(a,b,c){
     //xy
     if (c=="x"){
