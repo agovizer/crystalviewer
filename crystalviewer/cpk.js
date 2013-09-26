@@ -4,12 +4,12 @@
 //queries cpkdictionary and returns result
 function cpkquery(x){
 	console.log("cpqueryfunctionorig: ", x);
-	var y = "0x" + cpkhtml[x];
+	var y = "0x" + cpk[x];
 	console.log("cpqueryfunctionnew: ", y);
 	return(y);
 }
 //cpk dictionary
-var cpkhtml = {
+var cpk = { //cpk colors in their html color codes
 "H":"FFFFFF",
 "He":"FF1493",
 "Li":"FF1493",

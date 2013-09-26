@@ -1,7 +1,7 @@
 //mx
 //this file generates cylinders connecting the two atoms based on the selected points
-CrystalViewer.prototype.linegen = function(a,b){
-    if (a==undefined || b==undefined) return;//cleanses input
+CrystalViewer.prototype.linegen = function(inputa,inputb){
+    if (inputa==undefined || inputb==undefined) return;//cleanses input
     var scene = this.scene;
     var renderer = this.renderer;
     var linarr = this.linarr, delarr = this.delarr;
@@ -9,20 +9,20 @@ CrystalViewer.prototype.linegen = function(a,b){
     var atoms = this.atoms;
     
     scene.remove(delarr[linarr.length-1]); //removes previous cylinder object
-    var i = a, j = b;
-    console.log(i,j,"far");
+    var in1 = inputa, in2 = inputb;
+    console.log(in1,in2,"far");
     //return[i,j];
-    var coor1 = atoms[i][1]; //get coordinates
-    var coor2 = atoms[j][1];
-    coor1 = coor1.toString();//parses coordinates
-    coor2 = coor2.toString();
-    var br1=coor1.split(",");
-    var br2=coor2.split(",");
+    var gCoordinate1 = atoms[in1][1]; //get coordinates
+    var gCoordinate2 = atoms[in2][1];
+    gCoordinate1 = gCoordinate1.toString();//parses coordinates
+    gCoordinate2 = gCoordinate2.toString();
+    var bCoordinate1=gCoordinate1.split(",");
+    var bCoordinate2=gCoordinate2.split(",");
     var material =  new THREE.MeshPhongMaterial( { color:0xffffff, shading: THREE.SmoothShading } ); //sets type of material
-    tall = findlength(br1,br2) * this.dial;
+    tall = findlength(bCoordinate1,bCoordinate2) * this.dial;
     var geometry = new THREE.CylinderGeometry(0.5,0.5,tall,this.rez,this.rez,false);
     delarr[linarr.length] = new THREE.Mesh(geometry, material); //creates new variable and points it to new object
-    newpos = findcoor(br1,br2);
+    newpos = findcoor(bCoordinate1,bCoordinate2);
     console.log("aefae",newpos);
     delarr[linarr.length] .position.x = newpos[0]*dial; //sets attributes
     delarr[linarr.length] .position.y = newpos[1]*dial;
@@ -34,7 +34,7 @@ CrystalViewer.prototype.linegen = function(a,b){
     //delarr[linarr.length].overdraw = true;
 	
 	//gets orientation of cylinder
-    var oriX = br2[0]-br1[0], oriY = br2[1]-br1[1], oriZ = br2[2] - br1[2];
+    var oriX = bCoordinate2[0]-bCoordinate1[0], oriY = bCoordinate2[1]-bCoordinate1[1], oriZ = bCoordinate2[2] - bCoordinate1[2];
     
     var deg2rad = Math.PI/180;
     var theta = Math.atan(Math.sqrt(oriX*oriX+oriZ*oriZ)/oriY), phi = Math.atan(oriX/oriZ);
@@ -52,7 +52,7 @@ CrystalViewer.prototype.linegen = function(a,b){
     rotateAroundWorldAxis(delarr[linarr.length], vy, phi);
     renderer.render(this.scene, this.camera);
     scene.add(delarr[linarr.length]);
-    console.log("Lingenfunction", coor1, " | ", coor2, "linarr", linarr.length);
+    console.log("Lingenfunction", gCoordinate1, " | ", gCoordinate2, "linarr", linarr.length);
     this.render();
     console.log(i,j,"close");
     return [i,j]; //returns last two values

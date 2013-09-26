@@ -2,26 +2,26 @@
 //builds scene
 
 //handles atom drawing
-CrystalViewer.prototype.addatoms = function(rez,rad){
+CrystalViewer.prototype.addatoms = function(resolution,rad){
     var atoms = this.atoms;
     var scene = this.scene;
-    var dial = this.dial;
-    this.rez = rez;
-    this.rad = rad;
+    var dialationFactor = this.dial; //dialates input coordinate system
+    this.resolution = resolution; //quality of the spheres and lighting
+    this.rad = rad; 
     
-    var geometry = new THREE.SphereGeometry(rad,rez,rez,0,Math.PI * 2,0, Math.PI); //creates the basic sphere geometry
-    console.log("Buildfunc4: rez,rad", rez, rad);//debug info
+    var geometry = new THREE.SphereGeometry(rad,resolution,resolution,0,Math.PI * 2,0, Math.PI); //creates the basic sphere geometry
+    console.log("Buildfunc4: resolution,rad", resolution, rad);//debug info
     for ( var i = 0; i < atoms.length; i++ ) {//creates for every atom
 	var cpk = cpkquery(atoms[i][0]); //calls cpk to get atomic num
 	var material =  new THREE.MeshPhongMaterial( { color:eval(cpk), shading: THREE.SmoothShading } ); //sets the material using cpk color
-	var coor = atoms[i][1]; //get coordinate
-	coors=coor.toString();//parse coordinate
-	console.log("Buildfunc4:", coors);
-	var br=coors.split(",");
+	var coordinate = atoms[i][1]; //get coordinate
+	var pCoordinate=coordinate.toString();//parse coordinate
+	console.log("Buildfunc4:", pCoordinate);
+	var bCoordinate=pCoordinate.split(",");
 	var item = new THREE.Mesh( geometry, material );
-	item.position.x = br[0]*dial;//sets position
-	item.position.y = br[1]*dial;
-	item.position.z = br[2]*dial;
+	item.position.x = bCoordinate[0]*dialationFactor;//sets position
+	item.position.y = bCoordinate[1]*dialationFactor;
+	item.position.z = bCoordinate[2]*dialationFactor;
 	item.updateMatrix();
 	item.matrixAutoUpdate = false;
 	scene.add(item);//adds to scene
@@ -50,7 +50,7 @@ CrystalViewer.prototype.buildframe = function(){
 	geometry5.vertices.push(new THREE.Vector3(cor[0],cor[1],cor[2]));
 	var base = new THREE.Line(geometry5, material5); 
 	scene.add(base);
-	//if statements needed to combine all the vertices with appropiate lines
+	//if statements needed to combine all the vertices with appropriate lines
 	if (i==4){
 	    var cor=eval(basenum[1]);
 	    geometry5.vertices.push(new THREE.Vector3(cor[0],cor[1],cor[2]));

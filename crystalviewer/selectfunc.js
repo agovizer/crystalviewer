@@ -2,6 +2,7 @@
 
 //display information pertaining to the model
 
+
 //get atom information if shift key is pressed
 CrystalViewer.prototype.selshift = function(x,y,z){
     this.shift = 0;

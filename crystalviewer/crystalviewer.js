@@ -31,7 +31,7 @@ function CrystalViewer(bases, atoms, containerID)
     this.renderer = renderer;
     controls.addEventListener( 'change', function() {self.render();}); //listens to any event
     
-    this.delarr = new Array(); // global(not nec) used to manage the deletion of prior lines
+    this.delarr = new Array(); // global(not necessary) used to manage the deletion of prior lines
     this.linarr = new Array(); //global array used by lingen.js and whose last 2 entries represented selected atom
     this.dial=100; //global dialation factor
     this.rez = null;

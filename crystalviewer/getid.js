@@ -1,42 +1,42 @@
 //mx
 
 //queries the input array and returns the id of the selected atom (select.js returns approx location)
-CrystalViewer.prototype.getid = function(x, y, z){
+CrystalViewer.prototype.getid = function(x, y, z){ //uses error to find correct id
     var atoms = this.atoms;
-    var errororig = new Array();
+    var originalError = new Array();
     var error = new Array();
     for ( var i = 0; i < atoms.length; i ++ ) {
-	var coor = atoms[i][1];
-	var coors=coor.toString();
-	var br=coors.split(",");
-	var xd = Math.abs(br[0] - x);
-	var yd = Math.abs(br[1] - y);
-	var zd = Math.abs(br[2] - z);
-	var total = xd + yd + zd;
-	error[i] = total;
-	console.log("getidfunction: x,y,z , total ", x,y,z, total);
+	var coordinates = atoms[i][1];
+	var sCoordinate=coordinates.toString();
+	var bCoordinate=sCoordinate.split(",");
+	var xError = Math.abs(bCoordinate[0] - x);
+	var yError = Math.abs(bCoordinate[1] - y);
+	var zError = Math.abs(bCoordinate[2] - z);
+	var totalError = xError + yError + zError;
+	error[i] = totalError;
+	console.log("getidfunction: x,y,z , totalError ", x,y,z, totalError);
     }
-    errororig = error.slice(0);
-    error.sort(numasc);
+    originalError = error.slice(0);
+    error.sort(sortNumerically);
     var goal=error[0];
-    var index=look(goal, errororig); //gets index based on lowest error
-    console.log("getidfunction: coors, index ", coors, index);
+    var index=retrieveID(goal, originalError); //gets index based on lowest error
+    console.log("getidfunction: sCoordinate, index ", sCoordinate, index);
     return index;
 };
 
 //aux functions		
 
 //sorts array	
-function numasc(a,b){
+function sortNumerically(a,b){
     return (a - b);
 }
 
 //gets index 
-function look(g, errororig){
-    // doesnt work: var num = errororig.indexOf(g);
-    for(var ii=0; ii<errororig.length; ii++){
-	if(errororig[ii] == g){
-	    return ii;
+function retrieveID(g, originalError){
+    // doesnt work: var num = originalError.indexOf(g);
+    for(var indexID=0; indexID<originalError.length; indexID++){
+	if(originalError[indexID] == g){
+	    return indexID;
 	}
     }
 }

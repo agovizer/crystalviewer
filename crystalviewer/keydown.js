@@ -1,6 +1,6 @@
 //mx
 //this file takes the keycodes and matches them up with their proper function
-
+//*****************Getoutput is undefined****************************
 //calls functions based on their keycode
 CrystalViewer.prototype.kdwn = function( kd ){
     var axistog = this.axistog;
