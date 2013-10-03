@@ -30,7 +30,7 @@ CrystalViewer.prototype.axistog = function(){
 	scene.add(this.zaxis);
 	console.log("togaxisfunction: zaxis created");
 	//r
-	render();
+	this.render();
 	axisenabled = 1;
 	return;
     }

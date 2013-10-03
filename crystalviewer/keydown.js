@@ -3,7 +3,6 @@
 //*****************Getoutput is undefined****************************
 //calls functions based on their keycode
 CrystalViewer.prototype.kdwn = function( kd ){
-    var axistog = this.axistog;
     
     console.log("Kdwnfunction: ","User Pressed ", kd.keyCode);
     if (kd.keyCode == "13"){
@@ -28,7 +27,7 @@ CrystalViewer.prototype.kdwn = function( kd ){
     }
     else if (kd.keyCode == "65"){
 	console.log("Kdwnfunction: ", "A Pressed-toggle axis");//toggles axis
-	axistog();
+	this.axistog();
     }
     else if (kd.keyCode == "16"){
 	if (this.done == 1){
