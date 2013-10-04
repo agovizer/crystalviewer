@@ -54,8 +54,8 @@ CrystalViewer.prototype.linegen = function(inputa,inputb){
     scene.add(delarr[linarr.length]);
     console.log("Lingenfunction", gCoordinate1, " | ", gCoordinate2, "linarr", linarr.length);
     this.render();
-    console.log(i,j,"close");
-    return [i,j]; //returns last two values
+    console.log(in1,in2,"close");
+    return [in1,in2]; //returns last two values
 };
 
 //gets cordinates from ids given
