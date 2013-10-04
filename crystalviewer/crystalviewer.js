@@ -52,15 +52,18 @@ function CrystalViewer(bases, atoms, containerID)
 
     // from keydown.js
     this.shift = 0;
-    document.addEventListener('keydown', function(kd) {self.kdwn(kd);}, false);
-    document.addEventListener('keyup', function(kd) {self.kup(kd);}, false);
+    $(container).keydown(function(kd) {self.kdwn(kd);});
+    $(container).keyup(function(kd) {self.kup(kd);});
     
     // from resize.js
-    window.addEventListener( 'resize', function(){self.resize();}, false );
+    $(container).resize(function(){self.resize();});
 
     // from select.js
-    this.first = null;
-    document.addEventListener( 'mousedown', function(msd){self.msedwn(msd);}, false );
+    this.first = null;  // index of first atom selected
+    $(container).mousedown(function(msd){self.msedwn(msd);});
+    
+    // focus on the crystal viewer div
+    $(container).focus();
 }
 
 CrystalViewer.prototype = {
