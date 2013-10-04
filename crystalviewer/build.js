@@ -37,12 +37,12 @@ CrystalViewer.prototype.buildframe = function(){
     bases.c = bases.c.map(function(x) { return x * 100; });
     var one = [0,0,0];
     var two = bases.a;
-    var three = comb(bases.a,bases.b);
+    var three = vectorAdd(bases.a,bases.b);
     var four = bases.b;
-    var five = comb(one, bases.c);
-    var six = comb(two, bases.c);
-    var seven = comb(three, bases.c);
-    var eight = comb(four, bases.c);
+    var five = vectorAdd(one, bases.c);
+    var six = vectorAdd(two, bases.c);
+    var seven = vectorAdd(three, bases.c);
+    var eight = vectorAdd(four, bases.c);
     var material5 = new THREE.LineBasicMaterial({color: 0x808080});
     var geometry5 = new THREE.Geometry();
     for (var i=1; i<5; i++){
@@ -98,9 +98,11 @@ CrystalViewer.prototype.buildframe = function(){
 };
 
 //combines arrays
-function comb(x,y){
+function vectorAdd(x,y){
     var out = new Array();
-    for ( var k=0; k<bases.a.length; k++){
+    var l1 = x.length, l2 = y.length;
+    if (l1!=l2) throw "vector length mismatch " + l1 + ", " + l2;
+    for ( var k=0; k<l1; k++){
 	out[k] = parseInt(x[k]) + parseInt(y[k]);
     }
     return out;
