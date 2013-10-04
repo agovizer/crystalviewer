@@ -56,7 +56,7 @@ function CrystalViewer(bases, atoms, containerID)
     document.addEventListener('keyup', function(kd) {self.kup(kd);}, false);
     
     // from resize.js
-    window.addEventListener( 'resize', function(){self.re();}, false );
+    window.addEventListener( 'resize', function(){self.resize();}, false );
 
     // from select.js
     this.first = null;
@@ -67,22 +67,7 @@ CrystalViewer.prototype = {
     'build': function(rez, rad){
 	//prompt ("Dialation Factor"); //obsolete
 	this.addatoms(rez,rad);
-	if (typeof(bases) !== 'undefined') {
-	    console.log("bases array exists");
-	    this.buildframe();
-	}
-	else{
-	    console.log("bases array does not exist");
-	}
-	//see input.js
-
-	//below is a related to getcoor.js
-
-	//end read from file
-	//}
-	/*else{
-	  alert("No selection made");
-	  }*/
+	this.buildframe();
     }
     , 'render': function() {
 	console.log("Renderfunction was called"); // disable to prevent consolespam

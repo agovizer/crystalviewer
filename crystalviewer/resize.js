@@ -1,7 +1,7 @@
 //mx
 
 //calls resize function if the window size changes
-CrystalViewer.prototype.re = function() {
+CrystalViewer.prototype.resize = function() {
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize( window.innerWidth, window.innerHeight );//sets new size

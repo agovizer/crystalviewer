@@ -22,7 +22,7 @@ CrystalViewer.prototype.kdwn = function( kd ){
     }
     else if (kd.keyCode == "82"){
 	console.log("Kdwnfunction: ", "R Pressed-running resize");//for forced refresh (if corrupted) - fixes a rare bug in firefox
-	re();
+	this.resize();
 	
     }
     else if (kd.keyCode == "65"){
