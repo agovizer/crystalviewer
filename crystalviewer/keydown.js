@@ -18,7 +18,7 @@ CrystalViewer.prototype.kdwn = function( kd ){
 	    return;
 	}
 	console.log("Kdwnfunction: ", "H Pressed-outputting help");//calls help
-	help();
+	this.help();
     }
     else if (kd.keyCode == "82"){
 	console.log("Kdwnfunction: ", "R Pressed-running resize");//for forced refresh (if corrupted) - fixes a rare bug in firefox

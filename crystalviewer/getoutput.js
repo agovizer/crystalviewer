@@ -17,20 +17,14 @@ CrystalViewer.prototype.getoutput = function(){
 	    output = "Final Ids: " + output;
 	    console.log("Output function: ", output);
 	    done = 1;
-	    outputheaderchg();
 	}
 	else{
 	    output = i + ", " + j;
 	    output = "Final Ids: " + output;
 	    ("Output function: ", output);
 	    done = 1;
-	    outputheaderchg();
 	}
     }
     return output;
 };
 
-//outputs to inner div
-function outputheaderchg(){
-    document.getElementById('outputheader').innerHTML="Output:";
-}

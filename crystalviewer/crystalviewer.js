@@ -2,21 +2,55 @@
 //main generation of the scene (setting)
 function CrystalViewer(bases, atoms, containerID)
 {
+    // save containerID
+    this.containerID = containerID;
+
+    // container
+    var container = document.getElementById( containerID );
+    $(container).addClass('crystalviewer');
+    
+    // banner
+    var banner = $('<div>'); $(container).append(banner);
+    banner.addClass('banner');
+    banner.text("Crystal Viewer Front End");
+    
+    // outputheader
+    var outputheader = $('<div>'); $(container).append(outputheader);
+    outputheader.addClass('outputheader');
+    outputheader.text("Output (Press C to clear):")
+    
+    // output
+    var output = $('<div>'); $(container).append(output);
+    output.addClass('output');
+    
+    // info
+    var info = $('<div>'); $(container).append(info)
+    info.addClass('info');
+    info.html('\
+  Use mouse/arrow keys to pan around.<br>\
+  Select two atoms using mouse.<br>\
+  Press "H" for help<br>\
+  Press "Enter" when done.<br>\
+  Press "A" to toggle axes.\
+');
+
     //preconfigdata
     // renderer
     var renderer = new THREE.WebGLRenderer( { antialias: true } );
     //renderer.setClearColor( scene.fog.color, 1 );
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    this.canvas_width = $(container).innerWidth();
+    this.canvas_height = $(container).innerHeight();
+    renderer.setSize(this.canvas_width, this.canvas_height);
     
     // add to container div
-    var container = document.getElementById( containerID );
     container.appendChild( renderer.domElement );
     
     // camera
-    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 ); 
+    var aspect_ratio = this.canvas_width/this.canvas_height;
+    var camera = new THREE.PerspectiveCamera( 75, aspect_ratio, 0.1, 1000 ); 
     camera.position.z = 250;
     // controls
-    var controls = new THREE.OrbitControls( camera ); //see oc.js
+    var controls = new THREE.OrbitControls( camera, container ); //see oc.js
     
     // scene
     var scene = new THREE.Scene(); // inits scene

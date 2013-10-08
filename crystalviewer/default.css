@@ -1,49 +1,48 @@
 body {
-    color: #000;
-    font-family:Helvetica;
-    font-size:18px;
-    text-align:center;
+    margin: 0;
+}
+.crystalviewer {
+    font-size:1.em;
     font-weight: bold;
+    font-family:Helvetica;
     background-color: #000;
-    margin: 0px;
-    overflow: hidden;
+    position: relative;
+    margin: 1em;
+    border: none;
 }
-
-#ban {
+.crystalviewer .banner {
+    text-align:center;
     color:#fff;
+    font-size: 2.em;
     position: absolute;
-    top: 0px; width: 100%;
-    padding: 5px;
-
+    width: 100%;
+    /* top: 0.2em; */
 }
-#info {
+.crystalviewer .info {
     color:#fff;
-    font-family:Helvetica;
-    position: absolute;
-    top: 0px; width: 100%;
-    font-size:11px;
+    bottom: 1em; right: 1em;
+    font-size:.8em;
     text-align:right;
-    padding: 5px;
-
+    position: absolute;
+    width: 50%;
 }
-#outputheader{
+.crystalviewer .outputheader{
     color:#fff;
-    font-family:Helvetica;
     position: absolute;
-    top: 25px; width: 100%;
-    font-size:11px;
+    /* top: 1.5em; left: 1em;*/
+    font-size:.8em;
     text-align:left;
-    padding: 5px;
-
 }
-#output{
+.crystalviewer .output{
     color:#808080;
-    font-family:Helvetica;
-    position: absolute;
-    top: 48px; width: 100%;
-    font-size:11px;
+    /* top: 3em; left: 1em; */
+    top: 3em;
+    font-size:.8em;
     text-align:left;
-    padding: 5px;
-
+    position: absolute;
+    width: 100%;
 }
-
+.crystalviewer .canvas{
+    top: 1em;
+    height: 90%;
+}

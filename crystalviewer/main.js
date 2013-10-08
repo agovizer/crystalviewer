@@ -19,6 +19,8 @@ function main(contaierID) {
     ];
 
     // crystal viewer
+    $('#'+contaierID).width(900);
+    $('#'+contaierID).height(400);
     var cv = new CrystalViewer(bases, atoms, contaierID);	//initializes object crystal viewer
 
 

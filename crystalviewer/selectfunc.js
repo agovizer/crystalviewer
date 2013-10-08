@@ -19,7 +19,8 @@ CrystalViewer.prototype.selshift = function(x,y,z){
 	stringdiag = "This: \"" + type + "\"" + " (ID \"" + id + "\"" + ")" + " at" + " (" + coor1 + ")";//concats info string 
     }
     console.log(this.first);
-    document.getElementById('output').innerHTML=stringdiag; //write to div
+    var container = $('#'+this.containerID);
+    container.children('.output').html(stringdiag); //write to div
     return;
 };
 
@@ -43,6 +44,7 @@ CrystalViewer.prototype.sel = function(i, j){
 	stringdiag = "Selected \"" + type1 + "\"" + " (ID \"" + i + "\"" + ")" + " at" + " (" + coor1 + ") " //concats info string if first selection
 	console.log("bad", stringdiag, "|", br1, "|", br2);
     }
-    document.getElementById('output').innerHTML=stringdiag; //write to div
+    var container = $('#'+this.containerID);
+    container.children('.output').html(stringdiag); //write to div
     return;
 };

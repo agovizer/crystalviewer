@@ -7,7 +7,10 @@ CrystalViewer.prototype.msedwn = function( msd ) {
     }
 	//get element mouse is on (uses vectors and collision)
     msd.preventDefault(); //disables orbitcontrols
-    var vector = new THREE.Vector3( ( msd.clientX / window.innerWidth ) * 2 - 1, - ( msd.clientY / window.innerHeight ) * 2 + 1, 0.5 );//creates mouse vector
+    var container = $('#'+this.containerID);
+    var canvas = container.find('canvas');
+    var canvas_offset = canvas.offset();
+    var vector = new THREE.Vector3( ( (msd.clientX-canvas_offset.left) / this.canvas_width ) * 2 - 1, - ( (msd.clientY-canvas_offset.top) / this.canvas_height ) * 2 + 1, 0.5 );//creates mouse vector
     this.projector.unprojectVector( vector, this.camera );
     var raycaster = new THREE.Raycaster( this.camera.position, vector.sub( this.camera.position ).normalize() );
     var intersects = raycaster.intersectObjects(this.scene.children);
